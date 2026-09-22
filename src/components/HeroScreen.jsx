@@ -31,13 +31,24 @@ export default function HeroScreen({ id, onDone, isActive }) {
     }
 
     let touchStartY = 0
-    const onTouchStart = (e) => { touchStartY = e.touches[0].clientY }
-    const onTouchMove  = (e) => {
+    const onTouchStart = (e) => {
+      touchStartY = e.touches[0].clientY
+    }
+    const onTouchMove = (e) => {
       if (busy.current) return
       const dy = touchStartY - e.touches[0].clientY
-      if (dy > 40) {
-        e.preventDefault()
-        onWheel({ deltaY: dy, preventDefault: () => {} })
+      if (dy < 25) return
+
+      e.preventDefault()
+      busy.current = true
+      touchStartY = e.touches[0].clientY  // reset để tránh trigger liên tục
+
+      if (!revealed) {
+        setRevealed(true)
+        setTimeout(() => { busy.current = false }, 1200)
+      } else {
+        setDone(true)
+        if (onDone) onDone()
       }
     }
 
