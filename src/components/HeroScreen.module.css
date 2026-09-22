@@ -1,0 +1,148 @@
+/* ─────────────────────────────────
+   HERO — 100vh, ảnh fixed không di chuyển
+   ───────────────────────────────── */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+}
+
+/* BG cố định — background-attachment: fixed giữ ảnh đứng yên khi scroll */
+.bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('/assets/hero.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  z-index: 0;
+  filter: blur(6px) brightness(0.95);
+  transform: scale(1.15); /* tránh viền trắng do blur */
+}
+
+.fadeBottom {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 18%;
+  background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.97));
+  z-index: 6;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────
+   LOGO
+   ───────────────────────────────── */
+.logo {
+  position: absolute;
+  top: 22px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+.logoImg {
+  height: 62px;
+  width: auto;
+  display: block;
+}
+
+/* ─────────────────────────────────
+   GRADUATION — căn giữa hoàn toàn
+   ───────────────────────────────── */
+.titles {
+  position: absolute;
+  top: 13vh;
+  left: 0; right: 0;
+  display: flex;
+  justify-content: center;
+  z-index: 5;
+  will-change: transform, opacity;
+}
+
+/* ─────────────────────────────────
+   GRADUATION image
+   ───────────────────────────────── */
+.gradImg {
+  width: clamp(200px, 88vw, 760px);
+  max-width: 90vw;
+  height: auto;
+  display: block;
+  user-select: none;
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────
+   2026 — căn giữa, z=2 (sau portrait)
+   ───────────────────────────────── */
+.year {
+  position: absolute;
+  bottom: 2vh;
+  left: 0; right: 0;
+  text-align: center;
+  font-family: 'Cormorant Unicase', serif;
+  font-weight: 700;
+  font-size: clamp(160px, 40vw, 580px);
+  color: rgba(255,255,255,0.36);
+  line-height: 1;
+  z-index: 3;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -4px;
+  white-space: nowrap;
+}
+
+/* ─────────────────────────────────
+   PORTRAIT — full height, hiện đủ cả người, căn giữa
+   ───────────────────────────────── */
+.portrait {
+  position: absolute;
+  bottom: -10vh;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 85vh;
+  width: auto;
+  z-index: 4;
+  pointer-events: none;
+}
+.portrait img {
+  height: 100%;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  object-position: bottom center;
+  user-select: none;
+  mix-blend-mode: multiply;
+}
+
+/* ─────────────────────────────────
+   SCROLL HINT
+   ───────────────────────────────── */
+.hint {
+  position: absolute;
+  bottom: 28px;
+  left: 0; right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  z-index: 9;
+  color: rgba(50,50,50,0.72);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+/* ─────────────────────────────────
+   RESPONSIVE
+   ───────────────────────────────── */
+@media (max-width: 600px) {
+  .portrait    { height: 75vh; }
+  .year        { font-size: clamp(80px, 28vw, 160px); letter-spacing: -2px; bottom: 2vh; z-index: 5; }
+  .logoImg     { height: 44px; }
+  .titles      { top: 20vh; transform: none; }
+  .fadeBottom  { height: 22%; }
+}

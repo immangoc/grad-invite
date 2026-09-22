@@ -1,0 +1,213 @@
+.section {
+  background: #f5f7ff;
+  padding: 80px 20px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+/* Figma: Screen 2 — white card, border-radius 48px, drop-shadow */
+.card {
+  background: #ffffff;
+  border-radius: 48px;
+  box-shadow: 0 2px 23px rgba(0, 35, 148, 0.25);
+  padding: 64px 48px 80px;
+  max-width: 760px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Graduation cap image */
+.capWrap { margin-bottom: 20px; display: flex; justify-content: center; }
+.cap {
+  height: 72px;
+  object-fit: contain;
+  /* subtle entrance feel */
+  display: block;
+}
+
+/* "Thân mời tới dự lễ tốt nghiệp của" */
+/* Figma: Cormorant Infant Medium, 36px, #000, tracking -1.08px */
+.subtitle {
+  font-family: 'Cormorant Infant', serif;
+  font-weight: 500;
+  font-size: clamp(20px, 2.5vw, 36px);
+  color: #000;
+  letter-spacing: -1.08px;
+  margin-bottom: 8px;
+  white-space: nowrap;
+}
+
+/* "Ma Thế Ngọc" — Figma: Qwitcher Grypen, 120px, #001e43 */
+.name {
+  font-family: 'Qwitcher Grypen', cursive;
+  font-weight: 400;
+  font-size: clamp(60px, 8.3vw, 120px);
+  color: #001e43;
+  line-height: 1;
+  margin: 0 0 24px;
+  letter-spacing: 0;
+}
+
+/* "10:00, Thứ Bảy" — Figma: Cormorant Medium, 48px */
+.time {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: clamp(24px, 3.3vw, 48px);
+  color: #000;
+  letter-spacing: -1.44px;
+  margin-bottom: 16px;
+}
+
+/* Date row: 3-column grid */
+.dateRow {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: clamp(12px, 2.2vw, 32px);
+  width: 100%;
+  max-width: 580px;
+  margin-bottom: 16px;
+}
+
+/* "Tháng 9" / "Năm 2026" columns */
+.dateLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.dateLabel span {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: clamp(18px, 3.3vw, 48px);
+  color: #000;
+  letter-spacing: -1.44px;
+}
+.hr {
+  width: 100%;
+  border: none;
+  border-top: 1.5px solid #000;
+}
+
+/* "26" — Figma: Cormorant Infant Medium, 148px, #0d0065 */
+.dateDay {
+  font-family: 'Cormorant Infant', serif;
+  font-weight: 500;
+  font-size: clamp(80px, 10.3vw, 148px);
+  color: #0d0065;
+  line-height: 1;
+  letter-spacing: -4.44px;
+  white-space: nowrap;
+}
+
+/* "Địa điểm" — Figma: Cormorant Medium, 32px */
+.locLabel {
+  font-family: 'Cormorant', serif;
+  font-weight: 500;
+  font-size: clamp(18px, 2.2vw, 32px);
+  color: #000;
+  letter-spacing: -0.96px;
+  margin: 0 0 12px;
+}
+
+/* "Tòa D1, Học viện Ngân hàng" — Figma: Cormorant SemiBold, 40px */
+.venue {
+  font-family: 'Cormorant', serif;
+  font-weight: 600;
+  font-size: clamp(20px, 2.8vw, 40px);
+  color: #000;
+  letter-spacing: -1.2px;
+  margin-bottom: 8px;
+}
+
+/* Address — Figma: Cormorant Garamond Regular, 32px */
+.address {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-size: clamp(16px, 2.2vw, 32px);
+  color: #000;
+  letter-spacing: -0.96px;
+  margin-bottom: 32px;
+}
+
+/* CTA wrap — cat image floats above button */
+.ctaWrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+/* Cat graduation photo — floats slightly above the button */
+.catImg {
+  width: clamp(140px, 14vw, 200px);
+  height: clamp(100px, 12vw, 172px);
+  object-fit: contain;
+  margin-bottom: -16px;
+  position: relative;
+  z-index: 2;
+  filter: drop-shadow(0 4px 16px rgba(0,0,0,0.12));
+}
+
+/* "Chỉ đường" button */
+/* Figma: gradient #0f2c77 → #425891, border-radius 100px, Cormorant Garamond Bold, 44px */
+.btnDir {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  padding: 20px 48px;
+  background: linear-gradient(181.7deg, #0f2c77 4%, #425891 96%);
+  color: #ffffff;
+  border: none;
+  border-radius: 100px;
+  text-decoration: none;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: clamp(24px, 3vw, 44px);
+  letter-spacing: 0.15px;
+  white-space: nowrap;
+  cursor: pointer;
+  min-width: 260px;
+  box-shadow: 0 4px 20px rgba(15, 44, 119, 0.3);
+}
+
+@media (max-width: 768px) {
+  .section { padding: 60px 16px 80px; }
+  .card {
+    padding: 48px 32px 64px;
+    border-radius: 40px;
+  }
+  .subtitle { font-size: clamp(18px, 3.5vw, 28px); }
+  .name     { font-size: clamp(56px, 12vw, 96px); }
+  .dateDay  { font-size: clamp(72px, 14vw, 120px); }
+  .catImg   { width: clamp(120px, 18vw, 180px); height: auto; }
+}
+
+@media (max-width: 600px) {
+  .section  { padding: 48px 12px 64px; }
+  .card     { padding: 36px 20px 52px; border-radius: 28px; }
+  .subtitle { white-space: normal; font-size: clamp(17px, 4.5vw, 26px); }
+  .name     { font-size: clamp(52px, 14vw, 86px); margin-bottom: 16px; }
+  .time     { font-size: clamp(22px, 5.5vw, 38px); }
+  .dateRow  { gap: 8px; max-width: 100%; }
+  .dateDay  { font-size: clamp(64px, 16vw, 108px); letter-spacing: -2px; }
+  .dateLabel span { font-size: clamp(16px, 4vw, 28px); }
+  .locLabel { font-size: clamp(16px, 4vw, 26px); }
+  .venue    { font-size: clamp(18px, 4.5vw, 32px); }
+  .address  { font-size: clamp(14px, 3.8vw, 26px); margin-bottom: 24px; }
+  .catImg   { width: clamp(100px, 22vw, 160px); height: auto; }
+  .btnDir   { padding: 14px 28px; min-width: 180px; font-size: clamp(20px, 5vw, 34px); }
+}
+
+@media (max-width: 480px) {
+  .card     { padding: 28px 16px 44px; border-radius: 22px; }
+  .name     { font-size: clamp(48px, 16vw, 76px); }
+  .dateDay  { font-size: clamp(56px, 18vw, 96px); }
+  .btnDir   { min-width: 160px; font-size: clamp(18px, 5.5vw, 30px); }
+}

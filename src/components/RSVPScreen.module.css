@@ -1,0 +1,179 @@
+.section {
+  position: relative;
+  background: #ffffff;
+  padding: 80px 20px 100px;
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  width: 100%;
+  max-width: 529px; /* Figma: Frame 2134281130, w=500 + padding */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title — Figma: Cormorant Garamond Bold, 32px, tracking -0.96px */
+.title {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: clamp(22px, 2.2vw, 32px);
+  color: #000;
+  text-align: center;
+  letter-spacing: -0.96px;
+  margin-bottom: 24px;
+  width: 100%;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  width: 100%;
+}
+
+/* ── Shared card style (Figma: backdrop-blur, border #9cb3f6, drop-shadow) ── */
+.pill,
+.box,
+.selectWrap {
+  background: #ffffff;
+  border: 1px solid #9cb3f6;
+  box-shadow: 0 2px 7.85px rgba(0, 23, 70, 0.17);
+  backdrop-filter: blur(10.65px);
+  -webkit-backdrop-filter: blur(10.65px);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.pill:focus-within,
+.box:focus-within,
+.selectWrap:focus-within {
+  border-color: #4258a0;
+  box-shadow: 0 2px 14px rgba(0, 23, 70, 0.25);
+}
+
+/* Name pill — Figma: rounded-full, px-6 py-4 */
+.pill {
+  border-radius: 1000px;
+  padding: 16px 24px;
+}
+
+/* Message box — Figma: rounded-large (16px), taller */
+.box {
+  border-radius: 16px;
+  padding: 16px 24px;
+}
+
+/* Attendance select — pill with chevron */
+.selectWrap {
+  border-radius: 1000px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+/* Shared input/textarea/select styles */
+.input,
+.textarea,
+.select {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 500;
+  font-size: clamp(18px, 1.7vw, 24px);
+  color: #222;
+  letter-spacing: 0.5px;
+  line-height: 24px;
+  background: transparent;
+  border: none;
+  outline: none;
+  width: 100%;
+  resize: none;
+}
+.input::placeholder,
+.textarea::placeholder { color: #757873; }
+.select { color: #757873; appearance: none; -webkit-appearance: none; cursor: pointer; }
+.select:valid { color: #222; }
+.select option { color: #222; }
+
+/* Chevron icon */
+.chevron {
+  pointer-events: none;
+  color: #4258a0;
+  flex-shrink: 0;
+  margin-left: 8px;
+  display: flex;
+  align-items: center;
+}
+
+/* Confirm button — Figma: gradient #0f2c77→#425891, rounded-full, Cormorant Garamond Bold */
+.btnConfirm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 48px;
+  background: linear-gradient(181.7deg, #0f2c77 4.38%, #425891 95.62%);
+  border: 1px solid #ffffff;
+  border-radius: 100px;
+  color: #ffffff;
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: clamp(20px, 1.9vw, 28px);
+  letter-spacing: 0.15px;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(15, 44, 119, 0.3);
+}
+
+/* Cap footer */
+.capWrap {
+  margin-top: 32px;
+  display: flex;
+  justify-content: center;
+}
+.cap {
+  height: 72px;
+  object-fit: contain;
+  opacity: 0.85;
+}
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 40px;
+  left: 50%;
+  /* x handled by framer-motion */
+  z-index: 9999;
+  padding: 16px 36px;
+  border-radius: 100px;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(16px, 1.4vw, 20px);
+  font-weight: 600;
+  white-space: nowrap;
+  box-shadow: 0 8px 32px rgba(15, 44, 119, 0.35);
+}
+.toastOk   { background: linear-gradient(181.7deg, #0f2c77 4%, #425891 96%); color: #fff; }
+.toastWarn { background: #fff3cd; color: #856404; border: 1px solid #ffc107; }
+
+@media (max-width: 768px) {
+  .section { padding: 60px 16px 80px; }
+  .inner   { max-width: 100%; padding: 0 8px; }
+  .input, .textarea, .select { font-size: clamp(16px, 3vw, 22px); }
+}
+
+@media (max-width: 600px) {
+  .section  { padding: 48px 12px 64px; }
+  .title    { font-size: clamp(20px, 4.5vw, 28px); }
+  .pill, .box, .selectWrap { padding: 13px 18px; }
+  .input, .textarea, .select { font-size: clamp(15px, 3.8vw, 20px); }
+  .btnConfirm { padding: 14px 32px; font-size: clamp(18px, 4.5vw, 24px); }
+  .form     { gap: 16px; }
+  .toast    { white-space: normal; max-width: 90vw; text-align: center; padding: 14px 24px; }
+}
+
+@media (max-width: 480px) {
+  .section  { padding: 36px 10px 52px; }
+  .title    { font-size: clamp(18px, 5vw, 26px); margin-bottom: 16px; }
+  .pill, .box, .selectWrap { padding: 11px 14px; }
+  .input, .textarea, .select { font-size: clamp(14px, 4vw, 18px); }
+  .btnConfirm { font-size: clamp(16px, 5vw, 22px); padding: 12px 24px; }
+  .cap      { height: 56px; }
+}

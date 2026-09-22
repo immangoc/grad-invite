@@ -1,0 +1,5 @@
+/* App-level resets — component styles live in their own .module.css */
+* { box-sizing: border-box; }
+
+/* Ensure no unwanted scroll on mobile */
+html, body { overflow-x: hidden; }

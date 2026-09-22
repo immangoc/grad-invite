@@ -1,0 +1,86 @@
+/* Figma: Screen 7 — 1455×778, cinematic fullwidth */
+.section {
+  position: relative;
+  width: 100%;
+  height: 62vh;
+  min-height: 380px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Parallax bg — oversized for travel */
+.bg {
+  position: absolute;
+  top: -20%;
+  left: 0; right: 0;
+  bottom: -20%;
+  background-image: url('/assets/08e43.png');
+  background-size: cover;
+  background-position: center top;
+  will-change: transform;
+  z-index: 0;
+  filter: blur(3px) brightness(0.85);
+  transform: scale(1.06); /* tránh viền trắng do blur */
+}
+
+/* overlay tối hơn để chữ nổi trên ảnh mờ */
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.62);
+  z-index: 1;
+}
+
+.content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+}
+
+/* "Sự hiện diện ..." — Figma: Cormorant Garamond Bold, 32px, white, tracking -0.96px */
+.sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 700;
+  font-size: clamp(16px, 2.2vw, 32px);
+  color: #ffffff;
+  letter-spacing: -0.96px;
+  margin-bottom: 0;
+  text-align: center;
+  width: clamp(280px, 36.7vw, 529px); /* Figma: w=529px */
+}
+
+/* "Thank you!" — Figma: Passions Conflict Regular, 200px, white */
+.thankYou {
+  font-family: 'Passions Conflict', cursive;
+  font-weight: 400;
+  font-size: clamp(72px, 13.9vw, 200px);
+  color: #ffffff;
+  line-height: 1;
+  text-shadow: 0 2px 24px rgba(0,0,0,0.25);
+  margin: 0;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .section  { height: 58vh; }
+  .sub      { font-size: clamp(16px, 3.2vw, 26px); width: auto; max-width: 90vw; }
+  .thankYou { font-size: clamp(64px, 17vw, 160px); }
+}
+
+@media (max-width: 600px) {
+  .section  { height: 55vh; min-height: 320px; }
+  .thankYou { white-space: normal; font-size: clamp(58px, 18vw, 130px); }
+  .sub      { font-size: clamp(15px, 4vw, 22px); }
+}
+
+@media (max-width: 480px) {
+  .section  { height: 50vh; min-height: 280px; }
+  .thankYou { font-size: clamp(52px, 20vw, 110px); }
+  .sub      { font-size: clamp(14px, 4.5vw, 20px); }
+}
