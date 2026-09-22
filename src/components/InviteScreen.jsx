@@ -97,7 +97,7 @@ export default function InviteScreen({ id, isActive }) {
               whileTap={{ scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              🐾 Chỉ đường
+              <span style={{ filter: 'brightness(0) invert(1)' }}>🐾</span> Chỉ đường
             </motion.a>
           </motion.div>
 
