@@ -2,6 +2,9 @@ import { useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import styles from './RSVPScreen.module.css'
 
+// 👇 Paste URL Apps Script vào đây sau khi deploy
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbylDoY6pqnln_17p5T3UtO_cXzg-pWi474-bVaHFxJJUIlrna7JT6V3HkLvkqnfveHK9Q/exec'
+
 const sectionVariants = {
   hidden: { opacity: 0, y: 50 },
   visible: {
@@ -20,17 +23,18 @@ const item = {
   visible: { opacity: 1, y: 0, transition: { duration: 0.55, ease: 'easeOut' } },
 }
 
-export default function RSVPScreen({ id, isActive, onSubmit, onAdvance }) {
+export default function RSVPScreen({ id, isActive, onAdvance }) {
   const shown = useRef(false)
   if (isActive) shown.current = true
   const animate = shown.current ? 'visible' : 'hidden'
 
-  const [name, setName]       = useState('')
-  const [message, setMessage] = useState('')
-  const [attend, setAttend]   = useState('')
-  const [toast, setToast]     = useState(null)
+  const [name,     setName]     = useState('')
+  const [message,  setMessage]  = useState('')
+  const [attend,   setAttend]   = useState('')
+  const [toast,    setToast]    = useState(null)
+  const [loading,  setLoading]  = useState(false)
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault()
     if (!name.trim()) {
       setToast({ text: 'Vui lòng nhập tên của bạn!', ok: false })
@@ -38,18 +42,34 @@ export default function RSVPScreen({ id, isActive, onSubmit, onAdvance }) {
       return
     }
 
-    const msg = attend === 'yes'
-      ? `🎉 Cảm ơn ${name}! Hẹn gặp bạn ngày 26/9!`
-      : `Cảm ơn ${name}! Rất tiếc khi bạn không thể đến.`
+    setLoading(true)
 
-    setToast({ text: msg, ok: true })
-    setTimeout(() => {
-      setToast(null)
-      if (onAdvance) onAdvance()
-    }, 2000)
+    try {
+      await fetch(SHEET_URL, {
+        method:  'POST',
+        mode:    'no-cors',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ name, message, attend }),
+      })
 
-    if (onSubmit) onSubmit({ name, message, attend })
-    setName(''); setMessage(''); setAttend('')
+      const msg = attend === 'yes'
+        ? `🎉 Cảm ơn ${name}! Hẹn gặp bạn ngày 26/9!`
+        : `Cảm ơn ${name}! Rất tiếc khi bạn không thể đến.`
+
+      setToast({ text: msg, ok: true })
+      setName(''); setMessage(''); setAttend('')
+
+      setTimeout(() => {
+        setToast(null)
+        if (onAdvance) onAdvance()
+      }, 2500)
+
+    } catch {
+      setToast({ text: 'Có lỗi xảy ra, thử lại nhé!', ok: false })
+      setTimeout(() => setToast(null), 3000)
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
@@ -121,11 +141,12 @@ export default function RSVPScreen({ id, isActive, onSubmit, onAdvance }) {
               variants={item}
               type="submit"
               className={styles.btnConfirm}
-              whileHover={{ scale: 1.02, y: -2 }}
-              whileTap={{ scale: 0.97 }}
+              disabled={loading}
+              whileHover={loading ? {} : { scale: 1.02, y: -2 }}
+              whileTap={loading ? {} : { scale: 0.97 }}
               transition={{ type: 'spring', stiffness: 400, damping: 20 }}
             >
-              Xác nhận
+              {loading ? 'Đang gửi...' : 'Xác nhận'}
             </motion.button>
 
           </form>
