@@ -14,7 +14,9 @@ const SCREEN_IDS = ['hero', 'invite', 'rsvp', 'thankyou']
 const snapTo = (id) => {
   const el = document.getElementById(id)
   if (!el) return
-  window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
+  requestAnimationFrame(() => {
+    window.scrollTo({ top: el.offsetTop, behavior: 'smooth' })
+  })
 }
 
 export default function App() {
@@ -33,7 +35,7 @@ export default function App() {
   const handleHeroDone = useCallback(() => {
     busy.current = true
     goNext()
-    setTimeout(() => { busy.current = false }, 1000)
+    setTimeout(() => { busy.current = false }, 600)
   }, [goNext])
 
   useEffect(() => {
@@ -46,7 +48,7 @@ export default function App() {
       if (screenRef.current === 0 || screenRef.current >= SCREEN_IDS.length - 1) return
       busy.current = true
       goNext()
-      setTimeout(() => { busy.current = false }, 900)
+      setTimeout(() => { busy.current = false }, 400)
     }
 
     const onWheel = (e) => {
