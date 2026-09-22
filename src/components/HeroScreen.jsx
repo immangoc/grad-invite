@@ -8,25 +8,29 @@ export default function HeroScreen({ id, onDone, isActive }) {
   const busy = useRef(false)
 
   useEffect(() => {
-    // Khi Hero không active hoặc đã xong → không cần xử lý scroll nữa
     if (!isActive || done) return
 
+    // Khoá scroll của trang khi Hero còn active
+    document.body.style.overflow = 'hidden'
+    document.body.style.position = 'fixed'
+    document.body.style.width = '100%'
+
     const onWheel = (e) => {
-      e.preventDefault()               // chặn browser scroll khi Hero còn active
+      e.preventDefault()
       if (busy.current) return
-      if (e.deltaY <= 0) return        // chỉ xử lý scroll xuống
+      if (e.deltaY <= 0) return
 
       busy.current = true
 
       if (!revealed) {
-        // Stage 1: hiện tất cả chữ
         setRevealed(true)
         setTimeout(() => { busy.current = false }, 1200)
       } else {
-        // Stage 2: báo App chuyển sang Invite
         setDone(true)
+        document.body.style.overflow = ''
+        document.body.style.position = ''
+        document.body.style.width = ''
         if (onDone) onDone()
-        // không cần reset busy vì listener sẽ bị gỡ ngay sau khi done=true
       }
     }
 
@@ -35,30 +39,37 @@ export default function HeroScreen({ id, onDone, isActive }) {
       touchStartY = e.touches[0].clientY
     }
     const onTouchMove = (e) => {
+      e.preventDefault()               // luôn chặn scroll trang
       if (busy.current) return
       const dy = touchStartY - e.touches[0].clientY
       if (dy < 25) return
 
-      e.preventDefault()
       busy.current = true
-      touchStartY = e.touches[0].clientY  // reset để tránh trigger liên tục
+      touchStartY = e.touches[0].clientY
 
       if (!revealed) {
         setRevealed(true)
         setTimeout(() => { busy.current = false }, 1200)
       } else {
         setDone(true)
+        document.body.style.overflow = ''
+        document.body.style.position = ''
+        document.body.style.width = ''
         if (onDone) onDone()
       }
     }
 
-    window.addEventListener('wheel',      onWheel,       { passive: false })
-    window.addEventListener('touchstart', onTouchStart,  { passive: true  })
-    window.addEventListener('touchmove',  onTouchMove,   { passive: false })
+    window.addEventListener('wheel',      onWheel,      { passive: false })
+    window.addEventListener('touchstart', onTouchStart, { passive: true  })
+    window.addEventListener('touchmove',  onTouchMove,  { passive: false })
     return () => {
       window.removeEventListener('wheel',      onWheel)
       window.removeEventListener('touchstart', onTouchStart)
       window.removeEventListener('touchmove',  onTouchMove)
+      // Cleanup khi unmount
+      document.body.style.overflow = ''
+      document.body.style.position = ''
+      document.body.style.width = ''
     }
   }, [isActive, revealed, done, onDone])
 
